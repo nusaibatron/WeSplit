@@ -14,6 +14,8 @@ struct ContentView: View {
     // when modifying, it boldens, when done, it fades
     @FocusState private var amountIsFocused: Bool
     
+    @State private var grandWithTip = 0.0
+
     @State private var numberOfPeople = 0
     var tipPercentages = [0, 10, 15, 18, 20]
     
@@ -23,10 +25,12 @@ struct ContentView: View {
 
         let tipValue = checkAmount / 100.00 * tipSelection
         let grandTotal = checkAmount + tipValue
+        
         let amountPerPerson = grandTotal / peopleCount
 
         return amountPerPerson
     }
+    
 
     var body: some View {
         NavigationView {
@@ -56,7 +60,9 @@ struct ContentView: View {
                 Section {
                     Text("Check Amount Entered: \(checkAmount) ")
                 }
-                
+                Section {
+                    Text("Grand total with tip: \(grandWithTip)")
+                }
                 Section {
                     Text("Amount per person: \(totalPerPerson)")
                 }
@@ -64,7 +70,7 @@ struct ContentView: View {
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
                         Spacer()
-                        Button("Done") {
+                        Button("Go Away") {
                             amountIsFocused = false
                         }
                     }
